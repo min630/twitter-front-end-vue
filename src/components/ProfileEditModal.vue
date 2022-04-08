@@ -29,6 +29,7 @@
               <button
                 type="submit"
                 class="btn btn-save"
+                data-bs-dismiss="modal"
                 :disabled="nameLength > 50 || introLength > 160"
               >
                 儲存

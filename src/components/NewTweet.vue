@@ -1,11 +1,9 @@
 <template>
-  <div id="new-tweet" class="d-flex">
+  <div id="new-tweet" class="d-flex w-100">
     <div><img class="avatar" width="50px" :src="currentUser.avatar" alt="" /></div>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column w-100">
       <textarea
-        class="input-new-tweet mt-2"
-        rows="1"
-        cols="65"
+        class="input-new-tweet mt-2 w-80"
         placeholder="有什麼新鮮事？"
         v-model="description"
       ></textarea>

@@ -7,7 +7,6 @@
       <div class="ms-3 mb-4 lh-1">
         <ul>
           <li class="menu-icon mb-4">
-            <!-- TODO:router-link -->
             <router-link to="/main" class="menu-text">
               <img class="me-3" :src="mainUrl" />
               首頁
@@ -126,7 +125,8 @@
       if (this.$route.path === '/main') {
         this.mainUrl = this.mainActiveUrl
       }
-      if (this.$route.path === '/user-profile') {
+      //user-profile頁面會隨params不同而有不同route path，所以以一開始進入的route name來設定
+      if (this.$route.name === 'user-tweets') {
         this.userProfileUrl = this.userProfileActiveUrl
       }
       if (this.$route.path === '/setting') {
@@ -138,8 +138,9 @@
 
 <style>
   #menu {
-    width: 230px;
-    /* margin-left: 103px; */
+    /* width: 230px; */
+    /* margin-left: 103px;  */
+    padding-left: 20%;
   }
   .btn-tweet {
     max-width: 210px;

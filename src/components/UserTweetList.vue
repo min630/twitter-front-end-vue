@@ -88,7 +88,9 @@ export default {
     return {
       userTweets: [],
       isLoading: true,
-      tweetActive: [],
+      tweetActive: {
+        User: {}
+      },
     };
   },
 

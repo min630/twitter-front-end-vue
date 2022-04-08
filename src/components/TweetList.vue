@@ -58,26 +58,6 @@
             </button>
           </div>
         </div>
-        <NewReplyModal :tweet="tweet" @after-reply-submit="afterReplySubmit" />
-      </div>
-    </div>
-    <!-- alert -->
-    <div
-      class="alert d-flex fixed-top"
-      id="alert"
-      role="alert"
-      v-if="alertStatus !== false"
-    >
-      <div class="ms-2 mx-auto my-auto text-alert">{{ alertMsg }}</div>
-      <div class="ms-auto">
-        <img
-          :src="require('./../assets/error-alert.svg')"
-          v-if="alertStatus === 'error'"
-        />
-        <img
-          :src="require('./../assets/success-alert.svg')"
-          v-else-if="alertStatus === 'success'"
-        />
       </div>
     </div>
     <NewReplyModal
@@ -114,6 +94,8 @@ import { mapState } from "vuex";
 import moment from "moment";
 import tweetsAPI from "./../apis/tweets";
 
+
+
 export default {
   name: "TweetList",
   components: {
@@ -127,7 +109,9 @@ export default {
       isLoading: true,
       alertMsg: "",
       alertStatus: false,
-      tweetActive: [],
+      tweetActive: {
+        User: {}
+      },
       isProcessing: false,
     };
   },

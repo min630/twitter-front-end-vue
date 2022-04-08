@@ -93,7 +93,9 @@ export default {
       userLikes: [],
       isLoading: true,
       isLiked: true,
-      tweetActive: [],
+      tweetActive: {
+        User: {}
+      },
     };
   },
   created() {

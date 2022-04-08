@@ -1,10 +1,10 @@
 <template>
-  <div class="row h-100">
-    <div class="menu col-3 mh-100">
+  <div class="row flex-nowrap">
+    <div class="menu col-3 vh-100">
       <Menu />
     </div>
     <!-- User-profile -->
-    <div class="user-profile col-6 me-3" id="user-profile">
+    <div class="user-profile col me-3" id="user-profile">
       <div class="page-title position-relative">
         <img
           src="../assets/arrow.png"
@@ -277,11 +277,11 @@ a {
   text-decoration: none;
   color: black;
 }
-#user-profile {
+/* #user-profile {
   height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
   padding: 0;
-}
+} */
 .user-profile {
   max-width: 600px;
   border-left: 1px solid var(--border-line-color);
