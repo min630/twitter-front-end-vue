@@ -7,6 +7,7 @@
 ### 專案優化Note (min630)
 
 2022.4.11 修正未點選NewReplyModal時console出現找不到avatar的問題(預設data格式)
+
 2022.4.25 優化個人資訊頁面推文、推文回覆、喜歡的內容、追隨者、正在追隨的alert資訊，追隨和正在追隨的人數變化顯示、大頭貼連結。
 
 ## 環境需求
@@ -32,13 +33,15 @@
 
 ## 測試用帳號
 
-Demo網址：
+Demo網址：https://min630.github.io/twitter-front-end-vue/
 
+1. 前台
 - user1：帳號 user1、密碼 12345678
 - user2：帳號 user2、密碼 12345678
 - user3：帳號 user3、密碼 12345678
 - user4：帳號 user4、密碼 12345678
 - user5：帳號 user5、密碼 12345678
+2. 後台
 - Admin：帳號 root、密碼 12345678
 
 ## 安裝專案
@@ -46,7 +49,7 @@ Demo網址：
 1. Clone 專案到本地
 
 ```
-git clone https://github.com/ywweng/twitter-front-end-vue.git
+git clone https://github.com/min630/twitter-front-end-vue.git
 ```
 
 2. 進入專案資料夾
@@ -67,7 +70,7 @@ npm install
 npm run serve
 ```
 
-5. 成功啟動後，請至瀏覽器輸入終端機提供的網址方能瀏覽專案
+5. 成功啟動後，在瀏覽器輸入終端機提供的本地端網址可瀏覽專案內容
 
 ## 團隊成員
 
