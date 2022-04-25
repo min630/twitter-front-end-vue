@@ -2,14 +2,20 @@
   <div class="row">
     <Spinner v-if="isLoading" />
     <!-- v-else -->
-    <div class="follow-list" >
-      <div class="user-card d-flex position-relative" v-for="follower in followerList" :key="follower.followerId">
-        <img :src="follower.avatar" class="avatar" alt="" />
+    <div class="follow-list">
+      <div
+        class="user-card d-flex position-relative"
+        v-for="follower in followerList"
+        :key="follower.followerId"
+      >
+        <router-link :to="{ name: 'user-profile', params: { userId: follower.followerId } }">
+          <img :src="follower.avatar" class="avatar" alt="" />
+        </router-link>
         <div class="user-info d-flex flex-column">
-          <div class="text-name">{{follower.name}}</div>
-          <div class="text-account ms-0">@{{follower.account}}</div>
+          <div class="text-name">{{ follower.name }}</div>
+          <div class="text-account ms-0">@{{ follower.account }}</div>
           <div class="text-content">
-            {{follower.introduction}}
+            {{ follower.introduction }}
           </div>
         </div>
         <button
@@ -36,8 +42,8 @@
 <script>
 import Spinner from "../components/Spinner.vue";
 import { Toast } from "../utils/helpers";
-import userAPI from "../apis/user"
-import { mapState } from 'vuex'
+import userAPI from "../apis/user";
+import { mapState } from "vuex";
 
 export default {
   name: "FollowerList",
@@ -57,27 +63,27 @@ export default {
     };
   },
   created() {
-    // const { id } = this.$route.params
-    const id = this.userId
+    const id = this.userId;
     this.fetchFollower(id);
   },
   watch: {
     userId(newValue) {
-      this.fetchFollower(newValue)
+      this.fetchFollower(newValue);
     },
-    
   },
-   computed: {
-      ...mapState(['currentUser']),
-    },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   methods: {
-
-     async fetchFollower(userId) {
+    async fetchFollower(userId) {
       try {
         const { data } = await userAPI.getUserFollowers({ userId });
-        // if (!data) {
-        //   throw new Error();
-        // }
+        if (!data.length) {
+          Toast.fire({
+            icon: "info",
+            title: "尚無任何跟隨者!",
+          });
+        }
         this.followerList = data;
         this.isLoading = false;
       } catch (error) {
@@ -90,50 +96,48 @@ export default {
     },
     async addFollow(id) {
       try {
-        const {data} = await userAPI.addFollow({ id })
+        const { data } = await userAPI.addFollow({ id });
         Toast.fire({
-          icon: 'success',
-          title: data.message
-        })
-        // this.user.isFollowing = true;
-        this.followerList = this.followerList.map(follower => {
-          if(follower.followingId === id) {
+          icon: "success",
+          title: data.message,
+        });
+        this.followerList = this.followerList.map((follower) => {
+          if (follower.followingId === id) {
             return {
               ...follower,
-              isFollowed: true
-            }
+              isFollowed: true,
+            };
           }
-          return follower
-        })
+          return follower;
+        });
       } catch (error) {
         Toast.fire({
-          icon: 'error',
-          title: error.response.data.message
-        })
+          icon: "error",
+          title: error.response.data.message,
+        });
       }
- 
     },
     async deleteFollow(followingId) {
       try {
-        const {data} = await userAPI.deleteFollow({followingId})
+        const { data } = await userAPI.deleteFollow({ followingId });
         Toast.fire({
-          icon: 'success',
-          title: data.message
-        })
-        this.followerList = this.followerList.map(follower => {
-          if(follower.followingId === followingId) {
+          icon: "success",
+          title: data.message,
+        });
+        this.followerList = this.followerList.map((follower) => {
+          if (follower.followingId === followingId) {
             return {
               ...follower,
-              isFollowed: false
-            }
+              isFollowed: false,
+            };
           }
-          return follower
-        })
+          return follower;
+        });
       } catch (error) {
         Toast.fire({
-          icon: 'error',
-          title: error.response.message
-        })
+          icon: "error",
+          title: error.response.message,
+        });
       }
     },
   },

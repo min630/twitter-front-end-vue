@@ -111,20 +111,14 @@ export default {
     async fetchLikes(userId) {
       try {
         const { data } = await userAPI.getUserLikes({ userId });
-        // if (!data.length) {
-        //   Toast.fire({
-        //   icon: "info",
-        //   title: "尚無喜歡的推文!",
-        // });
-        // }
         this.userLikes = data;
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        // Toast.fire({
-        //   icon: "info",
-        //   title: error.response.data.message,
-        // });
+        Toast.fire({
+          icon: "info",
+          title: error.response.data.message,
+        });
       }
     },
     handleReplyModal(tweet) {

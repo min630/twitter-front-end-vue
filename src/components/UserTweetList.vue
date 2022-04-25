@@ -107,18 +107,14 @@ export default {
     async fetchTweets(userId) {
       try {
         const { data } = await userAPI.getUserTweets({ userId });
-        // if (!data) {
-        //   throw new Error("尚無任何推文！");
-        // }
         this.userTweets = data;
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        console.log(error.message);
-        // Toast.fire({
-        //   icon: "error",
-        //   title: '無法取得推文，請稍再試',
-        // });
+        Toast.fire({
+          icon: "error",
+          title: error.response.data.message,
+        });
       }
     },
     async addLike(id) {

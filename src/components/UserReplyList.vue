@@ -75,7 +75,10 @@ export default {
       try {
         const {data} = await userAPI.getUserReplies({userId})
         if(!data.length) {
-          throw new Error('尚無任何回覆！')
+          Toast.fire({
+          icon: "info",
+          title: '使用者並沒有任何推文回覆!',
+        });
         }
         this.userReplies = data
         this.isLoading = false; 
@@ -83,7 +86,7 @@ export default {
         this.isLoading = false;
         Toast.fire({
           icon: "error",
-          title: '無法取得推文與回覆，請稍再試',
+          title: '無法取得推文與回覆，請稍再試!',
         });
       }
     }

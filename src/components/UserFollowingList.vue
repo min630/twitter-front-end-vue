@@ -9,7 +9,9 @@
         v-for="user in followings"
         :key="user.followingId"
       >
-        <img :src="user.avatar" class="avatar" alt="" />
+        <router-link :to="{ name: 'user-profile', params: { userId: user.followingId } }">
+          <img :src="user.avatar" class="avatar" alt="" />
+        </router-link>
         <div class="user-info d-flex flex-column">
           <div class="text-name">{{ user.name }}</div>
           <div class="text-account ms-0">@{{ user.account }}</div>
@@ -63,7 +65,6 @@ export default {
     };
   },
   created() {
-    // const { id } = this.$route.params
     const id = this.userId;
     this.fetchFollowing(id);
   },
@@ -80,17 +81,20 @@ export default {
     async fetchFollowing(userId) {
       try {
         const { data } = await userAPI.getUserFollowing({ userId });
-        // if (!data) {
-        //   throw new Error("沒有正在追隨的人！");
-        // }
+        if (!data.length) {
+          Toast.fire({
+            icon: "info",
+            title: "尚無任何正在跟隨的對象!",
+          });
+        }
         this.followings = data;
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        // Toast.fire({
-        //   icon: "error",
-        //   title: "無法取得正在追隨名單，請稍後再試",
-        // });
+        Toast.fire({
+          icon: "error",
+          title: error.response.data.message,
+        });
       }
     },
     async addFollowing(id) {

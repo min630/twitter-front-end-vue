@@ -81,14 +81,14 @@
           </div>
           <div class="followship">
             <span class="following fw-bold">
-              <router-link :to="`/user-profile/${user.id}/follow`">
+              <router-link :to="`/user-profile/${user.id}/followings`">
                 {{ user.followingCount }}個<span class="sub-text"
-                  >跟隨中</span
+                  >正在跟隨</span
                 ></router-link
               >
             </span>
             <span class="follower ms-4 fw-bold">
-              <router-link :to="`/user-profile/${user.id}/follow`">
+              <router-link :to="`/user-profile/${user.id}/followers`">
                 {{ user.followerCount }}位<span class="sub-text">跟隨者</span>
               </router-link>
             </span>
@@ -122,7 +122,6 @@ import NavTabs from "../components/NavTabs.vue";
 import Menu from "../components/Menu.vue";
 import PopularUser from "../components/PopularUser.vue";
 import userAPI from "../apis/user";
-// import { mapState } from "vuex";
 import { emptyImageFilter } from "../utils/mixins";
 import { Toast } from "../utils/helpers";
 
@@ -155,9 +154,7 @@ export default {
       isNotified: false, //這個沒有設定，重新整理就會還原
     };
   },
-  // computed: {
-  //   ...mapState(["currentUser"]),
-  // },
+
   created() {
     const { userId } = this.$route.params;
     this.fetchUser(userId);
@@ -200,7 +197,6 @@ export default {
         };
         this.fetchCurrentUser();
       } catch (error) {
-        // console.log(error.response);
         Toast.fire({
           icon: "error",
           title: error.response.data.message,
@@ -226,7 +222,7 @@ export default {
         const { data } = await userAPI.addFollow({ id });
         console.log(data.message);
         this.user.isFollowed = true;
-        this.user.followingCount += 1;
+        this.user.followerCount += 1;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -239,7 +235,7 @@ export default {
         const { data } = await userAPI.deleteFollow({ followingId });
         console.log(data.message);
         this.user.isFollowed = false;
-        this.user.followingCount -= 1;
+        this.user.followerCount -= 1;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -277,11 +273,6 @@ a {
   text-decoration: none;
   color: black;
 }
-/* #user-profile {
-  height: 100vh;
-  overflow-y: auto;
-  padding: 0;
-} */
 .user-profile {
   max-width: 600px;
   border-left: 1px solid var(--border-line-color);
@@ -347,5 +338,8 @@ a {
 .btn-following {
   background-color: var(--orange);
   color: white;
+}
+.followship a:hover {
+  color: var(--orange);
 }
 </style>
