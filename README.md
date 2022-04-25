@@ -4,6 +4,8 @@
 
 為前後端分離的協作專案，模擬 twitter 功能
 
+[開發過程與心得](https://medium.com/@miki-chiang/simple-twitter-%E5%8D%94%E4%BD%9C%E5%B0%88%E6%A1%88%E8%A8%98%E9%8C%84-611e29c2f6ad)
+
 ### 專案優化Note (min630)
 
 2022.4.11 修正未點選NewReplyModal時console出現找不到avatar的問題(預設data格式)
